@@ -31,6 +31,7 @@ function Bitmap(filePath) {
  * Parser -- accepts a buffer and will parse through it, according to the specification, creating object properties for each segment of the file
  * @param buffer
  */
+
 Bitmap.prototype.parse = function(buffer) {
   this.buffer = buffer;
   this.type = buffer.toString('utf-8', FILE_TYPE_OFFSET, 2);
@@ -47,6 +48,7 @@ Bitmap.prototype.parse = function(buffer) {
  * Transform a bitmap using some set of rules. The operation points to some function, which will operate on a bitmap instance
  * @param operation
  */
+ 
 Bitmap.prototype.transform = function(operation) {
   // This is really assumptive and unsafe
   transforms[operation](this);
