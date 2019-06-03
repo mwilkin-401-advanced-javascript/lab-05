@@ -188,7 +188,8 @@ function transformWithCallbacks() {
       bitmap.parse(buffer);
       bitmap.transform(operation);
       fileWriter(bitmap);
-    });
+    })
+    .catch(err =>{throw err;});
 }
 
 // TODO: Explain how this works (in your README)
