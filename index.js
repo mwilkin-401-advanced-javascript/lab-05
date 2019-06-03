@@ -48,7 +48,7 @@ Bitmap.prototype.parse = function(buffer) {
  * Transform a bitmap using some set of rules. The operation points to some function, which will operate on a bitmap instance
  * @param operation
  */
- 
+
 Bitmap.prototype.transform = function(operation) {
   // This is really assumptive and unsafe
   transforms[operation](this);
@@ -157,28 +157,38 @@ const transforms = {
 
 // ------------------ GET TO WORK ------------------- //
 
+const fileReader = (bitmap) => {
+  return new Promise ((resolve, reject) => {
+    fs.readFile(file, (err, buffer) => {
+      if (err) reject(err);
+      else {
+        resolve(buffer);
+      }
+    });
+  });
+};
+
+const fileWriter = (bitmap) => {
+  return new Promise ((resolve, reject) => {
+    fs.writeFile(bitmap.newFile, bitmap.buffer, (err, out) => {
+      if (err) reject (err);
+      else {
+        console.log(`Bitmap Transformed: ${bitmap.newFile}`);
+        resolve(`Bitmap Transformed: ${bitmap.newFile}`);
+      }
+    });
+  });
+};
+
+
 function transformWithCallbacks() {
 
-  fs.readFile(file, (err, buffer) => {
-
-    if (err) {
-      throw err;
-    }
-
-    bitmap.parse(buffer);
-
-    bitmap.transform(operation);
-
-    // Note that this has to be nested!
-    // Also, it uses the bitmap's instance properties for the name and thew new buffer
-    fs.writeFile(bitmap.newFile, bitmap.buffer, (err, out) => {
-      if (err) {
-        throw err;
-      }
-      console.log(`Bitmap Transformed: ${bitmap.newFile}`);
+  fileReader(bitmap)
+    .then(buffer => {
+      bitmap.parse(buffer);
+      bitmap.transform(operation);
+      fileWriter(bitmap);
     });
-
-  });
 }
 
 // TODO: Explain how this works (in your README)
