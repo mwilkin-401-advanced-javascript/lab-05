@@ -2,6 +2,9 @@
 
 const fs = require('fs');
 // const transformGreyscale = require('./lib/greyscale.js');
+// const doTheInversion = require('./lib/inversion.js');
+// const lightenImage = require('./lib/lighten.js');
+// const darkenImage = require('./lib/darken.js');
 
 
 const FILE_TYPE_OFFSET = 0;
@@ -13,7 +16,7 @@ const BYTES_PER_PIXEL_OFFSET = 28;
 const COLOR_TABLE_OFFSET = 54;
 
 
-const buffer = fs.readFileSync(`${__dirname}/assets/baldy.bmp`);
+// const buffer = fs.readFileSync(`${__dirname}/assets/baldy.bmp`);
 
 /**
  * Bitmap -- receives a file name, used in the transformer to note the new buffer
@@ -107,13 +110,36 @@ const doTheInversion = (bmp) => {
   }
 };
 
-// const lighten = (bmp) => {
+const lightenImage = (bmp) => {
+  console.log('Lightening the bitmap', bmp);
 
-//   for(let i = 0; i < bmp.colorArray.length; i +=4){
+  if(!bmpValidator(bmp)){
+    throw 'Invalid .bmp file.';
+  } else {
+    for(let i = 0; i < bmp.colorArray.length; i +=4){
+      bmp.colorArray[i] = bmp.colorArray[i] + 55;
+      bmp.colorArray[i+1] = 255 - bmp.colorArray[i+1] + 55; 
+      bmp.colorArray[i+2] = 255 - bmp.colorArray[i+2] + 55;
+    }
+    console.log('Colors lightened');
+  }
+};
 
-//   }
-// }
+const darkenImage = (bmp) => {
+  console.log('Darkening the bitmap', bmp);
 
+  if(!bmpValidator(bmp)){
+    throw 'Invalid .bmp file.';
+  } else {
+    for(let i = 0; i < bmp.colorArray.length; i +=4){
+      bmp.colorArray[i] = bmp.colorArray[i] * 0.5;
+      bmp.colorArray[i+1] = 255 - bmp.colorArray[i+1] * 0.5; 
+      bmp.colorArray[i+2] = 255 - bmp.colorArray[i+2] * 0.5;
+    }
+    console.log('Colors darkened');
+  }
+
+};
 
 /**
  * A dictionary of transformations
@@ -122,6 +148,8 @@ const doTheInversion = (bmp) => {
 const transforms = {
   greyscale: transformGreyscale,
   invert: doTheInversion,
+  darken: darkenImage,
+  lighten: lightenImage,
 
 };
 
