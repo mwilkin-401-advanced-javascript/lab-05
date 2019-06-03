@@ -10,7 +10,6 @@
     "test-watch": "jest --watchAll --verbose --coverage",
     "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json",
     "build jsdoc": "jsdoc -r . -d docs/"
-
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,7 @@
   "homepage": "https://github.com/mwilkin-401-advanced-javascript/lab-05#readme",
   "dependencies": {
     "eslint": "^5.16.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "lint": "^0.6.5"
   }
 }
