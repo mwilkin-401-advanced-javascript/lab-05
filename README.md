@@ -1,5 +1,4 @@
-# lab-05
-BitMap Transformer
+# Lab-05 BitMap Transformer
 
 [![Build Status](https://www.travis-ci.com/mwilkin-401-advanced-javascript/lab-04.svg?branch=master)](https://www.travis-ci.com/mwilkin-401-advanced-javascript/lab-05)
 
@@ -12,22 +11,33 @@ BitMap Transformer
 
 ### Documentation
 
-Dependencies
+### Dependencies
 jest
 eslint
 
-Modules
+### Modules
 
+fileReader => 
+fileWriter => 
+
+bmpValidator => validates file is .bmp
+darken => darkens the colors of bitmap
+lighten => lightens the colors of bitmap
+inversion => inverts the colors of bitmap
+grayscale => transforms the bitmap to grayscale
 
 Exported Values and Methods
 
 
 ### Setup
 
+Install Dependencies
+
 Running the app
 npm start
 
 ### Tests
+
 How do you run tests?
 npm test
 
