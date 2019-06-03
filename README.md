@@ -20,7 +20,7 @@ eslint
 fileReader => 
 fileWriter => 
 
-bmpValidator => validates file is .bmp
+bmpValidator => validates file is a proper .bmp file
 darken => darkens the colors of bitmap
 lighten => lightens the colors of bitmap
 inversion => inverts the colors of bitmap
